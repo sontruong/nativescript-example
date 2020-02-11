@@ -1,0 +1,16 @@
+<GridLayout class="page"  columns="*" rows="auto, *">
+    <search-bar hint="Input name or code or phone" [text]="searchString" (textChange)="onSearch($event)" (submit)="onSubmitSearch($event)" 
+    color="black" textFieldHintColor="black" row="0"></search-bar>
+    <ListView [items]="items" class="list-group" itemTemplateSelector="$index" row="1">
+        <ng-template let-item="item">
+            <GridLayout columns="2*, 2*, 2*" rows="*2,*2,*" [nsRouterLink]="['/pages/shippingplan', item.id]">
+                <Label col="0" row="0" [text]="item.code" class="list-group-item txt-bolder"></Label>
+                <Label col="1" row="0" colSpan="2" [text]="item.channel?.name" class="list-group-item txt-bolder"></Label>
+                <Label col="0" row="1" [text]="item.startDate | date: 'dd/MM/yyyy'" class="list-group-item"></Label>
+                <Label col="1" row="1" [text]="item.expectedEndDate | date: 'dd/MM/yyyy'" class="list-group-item"></Label>
+                <Label col="2" row="1" [text]="item.status" class="list-group-item"></Label>
+                <Label col="0" row="2" colSpan="3" [text]="item.salesEmp?.name" class="list-group-item"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</GridLayout>

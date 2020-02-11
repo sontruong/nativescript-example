@@ -1,0 +1,47 @@
+<FlexboxLayout class="page">
+    <StackLayout class="form">
+        <Image class="logo" src="~/imgs/avatar.png"></Image>
+        <Label class="header" text="{{ 'app_name' | translate}}"></Label>
+
+        <PreviousNextView>
+            <GridLayout rows="auto, auto, auto">
+                <StackLayout row="0" class="input-field">
+                    <TextField class="input" hint="{{'txt.username' | translate}}" [isEnabled]="!processing"
+                        keyboardType="email" autocorrect="false"
+                        autocapitalizationType="none" [(ngModel)]="username"
+                        returnKeyType="next" (returnPress)="focusPassword()"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+
+                <StackLayout row="1" class="input-field">
+                    <TextField #password class="input" [isEnabled]="!processing"
+                        hint="{{'txt.pass' | translate}}" secure="true" [(ngModel)]="pass"
+                        [returnKeyType]="isLoggingIn ? 'done' : 'next'"
+                        (returnPress)="focusConfirmPassword()"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+
+                <StackLayout row="2" *ngIf="!isLoggingIn" class="input-field">
+                    <TextField #confirmPassword class="input" [isEnabled]="!processing"
+                        hint="{{'txt.confirm.pass' | translate}}" secure="true" [(ngModel)]="confirmPass"
+                        returnKeyType="done"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+
+                <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+            </GridLayout>
+        </PreviousNextView>
+
+        <Button [text]="isLoggingIn ? 'Log In' : 'Sign Up'" [isEnabled]="!processing"
+            (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+        <Label *ngIf="isLoggingIn" text="{{'txt.forgot.pass' | translate}}" class="login-label"
+            (tap)="forgotPassword()"></Label>
+    </StackLayout>
+
+    <Label *ngIf="config.hasCreateAccount" class="login-label sign-up-label" (tap)="toggleForm()">
+        <FormattedString>
+            <Span [text]="isLoggingIn ? 'Don’t have an account? ' : 'Back to Login'"></Span>
+            <Span [text]="isLoggingIn ? 'Sign up' : ''" class="bold"></Span>
+        </FormattedString>
+    </Label>
+</FlexboxLayout>

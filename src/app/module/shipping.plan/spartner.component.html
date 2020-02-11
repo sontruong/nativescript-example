@@ -1,0 +1,39 @@
+<GridLayout *ngIf="obj" class="page padding-main" columns="*" rows="auto, auto, *">
+    <FlexboxLayout flexDirection="column" class="page" row="0">
+        <Label class="h3" style="color: burlywood" [text]="'(' + obj.partner.code + ') ' + obj.partner.name"></Label>
+        <Label class="h4" [text]="'Address: '"></Label>
+        <Label *ngFor="let adr of addrs" [text]="adr"></Label>
+        <Label class="h4" [text]="'Mobile: ' + obj.phone"></Label>
+        <Label class="h4" [text]="'Liability: ' + (obj.liability | number)"></Label>
+        <StackLayout class="hr-light"></StackLayout>
+    </FlexboxLayout>
+    <FlexboxLayout flexDirection="row" class="page" row="1">
+        <Button text="{{'button.ADD.PRODUCT' | translate}}" (tap)="addnew()" class="btn btn-primary m-t-20"></Button>
+        <Button [text]="'button.open.map' | translate" (tap)="openmap()" class="btn btn-primary m-t-20"></Button>
+        <Button [text]="'button.requestdebt' | translate" (tap)="openmap()" class="btn btn-primary m-t-20"></Button>
+        <Button [text]="'button.completed' | translate" (tap)="openmap()" class="btn btn-primary m-t-20"></Button>
+    </FlexboxLayout>
+    <FlexboxLayout flexDirection="column" class="page" row="2" *ngIf="obj.purchaseOrder">
+        <Label class="h4" [text]="'Purchased order: ' + obj.purchaseOrder.code"></Label>
+        <Label [text]="'Order date: ' + (obj.purchaseOrder.orderDate | date: 'dd/MM/yyyy')"></Label>
+        <Label [text]="'Need collect: ' + (obj.purchaseOrder.totalMoney - obj.purchaseOrder.paid | number)"></Label>
+        
+        <GridLayout columns="*, 70px, 70px" rows="auto">
+            <Label col="0" row="0" [text]="'Partner/Customer'" class="h4 list-group-item txt-bolder"></Label>
+            <Label col="1" row="0" [text]="'Sales amount'" class="h4"></Label>
+            <Label col="2" row="0" [text]="'Return amount'" class="h4"></Label>
+        </GridLayout>
+        <ListView [items]="obj.goods" itemTemplateSelector="$index">
+            <ng-template let-item="item">
+                <GridLayout columns="*, 70px, 70px, 20px, 20px" rows="auto">
+                    <Label col="0" row="0" [text]="item.product.name" class="list-group-item txt-bolder"></Label>
+                    <Label col="1" row="0" [text]="item.saleAmount | number"></Label>
+                    <Label col="2" row="0" [text]="item.receiveAmount | number"></Label>
+                    <Label col="3" row="0" text="&#xf044;" class="fas"></Label>
+                    <Label col="4" row="0" text="&#xf2ed;" class="fas"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </FlexboxLayout>
+    
+</GridLayout>

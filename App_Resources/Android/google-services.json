@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "289498871535",
+    "firebase_url": "https://minierpo.firebaseio.com",
+    "project_id": "minierpo",
+    "storage_bucket": "minierpo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289498871535:android:81b0dc2875776c60",
+        "android_client_info": {
+          "package_name": "org.nativescript.erpappui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289498871535-s6jtl30ac5urk3h60256g0e1mjqpteaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNPLVAJ2UCV1VCm_zfloNJUSlQqqOPU34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289498871535-s6jtl30ac5urk3h60256g0e1mjqpteaa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

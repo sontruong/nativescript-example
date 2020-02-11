@@ -1,0 +1,21 @@
+<GridLayout columns="*" rows="auto, auto, auto, *">
+    <FlexboxLayout  flexDirection="column" class="m-15" col="0" row="0">
+        <FlexboxLayout class="m-15" col="0" row="0">
+            <Label class="h2" [text]="item.id + '. '"></Label>
+            <Label class="h2" [text]="item.title"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout class="m-15" col="0" row="0">
+            <Label class="h5" [text]="item.createdByEmp.name"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout class="m-15" col="0" row="0">
+            <Label class="h5" [text]="'Status: ' + item.status"></Label>
+        </FlexboxLayout>
+    </FlexboxLayout>
+    <FlexboxLayout flexDirection="row" class="m-15" col="0" row="1">
+        <Button *ngIf="item.status === 'PENDING'" text="{{'button.need.clarification' | translate}}" class="btn btn-primary m-t-20"></Button>
+        <Button *ngIf="item.status === 'PENDING' || item.status === 'PENDING'" [text]="'button.STARTED' | translate" class="btn btn-primary m-t-20"></Button>
+        <Button *ngIf="item.status === 'STARTED'" [text]="'button.completed' | translate" class="btn btn-primary m-t-20"></Button>
+    </FlexboxLayout>
+    <Label class="h4" [text]="item.role" col="0" row="2"></Label>
+    <WebView src="{{ item.content }}" col="0" row="3"></WebView>
+</GridLayout>

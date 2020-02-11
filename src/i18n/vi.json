@@ -1,0 +1,21 @@
+{
+    "app_name": "TQ - MiniERP",
+    "app_settings": "Cài đặt",
+    "txt.username": "Tài khoản",
+    "txt.pass": "Mật khẩu",
+    "txt.confirm.pass": "Xác nhận mật khẩu",
+    "txt.forgot.pass": "Quên mật khẩu?",
+    "minierp.menu.home": "Trang chủ",
+    "minierp.menu.contacts": "Danh bạ",
+    "minierp.menu.purchase.order": "Bán hàng",
+    "minierp.menu.shipping": "Giao hàng",
+    "minierp.menu.todolist": "Công việc",
+    "minierp.menu.checklist": "Checklist",
+    "minierp.contact.employee": "Nhân viên",
+    "minierp.contact.supplier": "Nhà CC",
+    "minierp.contact.customer": "Khách hàng",
+    "minierp.shipping.fee": "Chi phí",
+    "minierp.shipping.progress": "Quá trình",
+    "minierp.shipping.info": "Thông tin"
+    
+}

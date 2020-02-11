@@ -1,0 +1,41 @@
+<GridLayout  columns="*" rows="auto, *" class="page">
+    <FlexboxLayout row="0" flexDirection="column" style="vertical-align: middle;">
+        <Label class="h3" [text]="'Date: ' + (date | date: 'dd/MM/yyyy')"></Label>
+        <GridLayout columns="*, auto" rows="auto" (tap)="checkPartner()" style="margin-bottom: 10px">
+            <Label row="0" col="0" [text]="'Select partner/customer'" class="h2 txt-bolder"></Label>
+            <Label row="0" col="1" text="&#xf030;" class="fas btn-icon"></Label>
+        </GridLayout>
+        <Label *ngIf="partner" [text]="partner?.code + ' - ' + partner?.name" class="h4 txt-bolder"></Label>
+        <StackLayout class="hr-light"></StackLayout>
+        <GridLayout columns="*, auto" rows="auto" (tap)="addProduct()" style="margin-bottom: 10px">
+            <Label col="0" row="0" [text]="'Add product'" class="h2 txt-bolder"></Label>
+            <Label col="1" row="0" text="&#xf030;" class="fas btn-icon"></Label>
+        </GridLayout>
+        <FlexboxLayout flexDirection="column" style="vertical-align: middle;">
+            <Button text="'Payment'" class="btn btn-primary m-t-20"></Button>
+        </FlexboxLayout>
+        <GridLayout columns="*, *" rows="auto" (tap)="addProduct()" style="margin-bottom: 10px">
+            <Label col="0" row="0" [text]="'Total money: ' + (totalMoney | number)" class="txt-bolder"></Label>
+            <Label row="0" col="1" [text]="'Total point: ' + (totalPoint | number)" class="txt-bolder"></Label>
+        </GridLayout>
+        <StackLayout class="hr-light"></StackLayout>
+    </FlexboxLayout>
+    
+    <ListView row="1" [items]="products" class="list-group" itemTemplateSelector="$index">
+        <ng-template let-item="item">
+            <GridLayout columns="*, 60px" rows="auto, auto, auto">
+                <Label row="0" col="0" [text]="'(' + item.code + ') ' + item.name" class="list-group-item txt-bolder"></Label>
+                <FlexboxLayout flexDirection="column" row="0" col="1" rowSpan="3" style="vertical-align: middle;">
+                    <Label text="&#xf044;" class="fas btn-icon"></Label>
+                    <Label text="&#xf2ed;" class="fas btn-icon"></Label>
+                </FlexboxLayout>
+                <Label row="1" col="0" [text]="'Package lot: GH7342766324'" class="list-group-item"></Label>
+                <FlexboxLayout flexDirection="row" row="2" col="0">
+                    <Label [text]="'         '"></Label>
+                    <Label [text]="'95.000 đ'" style="color: red"></Label>
+                    <Label [text]="'x 1' + '(' + item.unit.name + ')'"></Label>
+                </FlexboxLayout>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</GridLayout>

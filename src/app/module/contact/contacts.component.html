@@ -1,0 +1,20 @@
+<GridLayout class="page"  columns="*" rows="auto, *, auto">
+    <search-bar hint="Input name or code or phone" [text]="searchString" (textChange)="onSearch($event)" (submit)="onSubmitSearch($event)" 
+    color="black" textFieldHintColor="black" row="0"></search-bar>
+    <ListView [items]="items" class="list-group" itemTemplateSelector="$index" row="1">
+        <ng-template let-item="item">
+            <GridLayout (tap)="call(item)" (longPress)="onLongPress(item)" columns="2*, 4*" rows="*2,*2,*">
+                <Label col="0" row="0" colSpan="2" [text]="item.name" class="list-group-item txt-bolder"></Label>
+                <Label col="0" row="1" [text]="item.phone" class="list-group-item"></Label>
+                <Label col="1" row="1" [text]="item.email" class="list-group-item"></Label>
+                <Label col="0" row="2" [text]="item.department?.name" class="list-group-item"></Label>
+                <Label col="1" row="2" [text]="item.position?.name" class="list-group-item"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+    <BottomNavigation activeColor="turquoise" inactiveColor="white" backgroundColor="black" loaded="bottomNavigationLoaded" row="2" (tabPressed)="onBottomNavigationTabPressed($event);" (tabSelected)="onBottomNavigationTabSelected($event)">
+        <BottomNavigationTab title="{{'minierp.contact.employee' | translate}}" icon="ic_employee"></BottomNavigationTab>
+        <BottomNavigationTab title="{{'minierp.contact.supplier' | translate}}" icon="ic_partner"></BottomNavigationTab>
+        <BottomNavigationTab title="{{'minierp.contact.customer' | translate}}" icon="ic_customer"></BottomNavigationTab>
+    </BottomNavigation>
+</GridLayout>

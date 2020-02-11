@@ -1,0 +1,27 @@
+
+<RadSideDrawer id="slidedrawer" drawerTransition="SlideInOnTopTransition">
+    <GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
+        <StackLayout class="sidedrawer-header">
+            <Image *ngIf="appUser" src="{{appUser.user?.avatar ? appUser.user.avatar : '~/imgs/avatar.png'}}" class="sidedrawer-avatar"></Image>
+            <Label *ngIf="appUser" class="sidedrawer-header-text var" text="{{appUser.employee?.name ? appUser.employee.name : appUser.username}}"></Label>
+            <Label *ngIf="appUser" class="sidedrawer-header-footnote var" text="logout" (tap)="logout();"></Label>
+        </StackLayout>
+        <ScrollView row="1">
+            <StackLayout class="sidedrawer-content">
+                <app-menu></app-menu>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+<!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
+    <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
+</RadSideDrawer>
+<!--
+The ActionBar is the NativeScript common abstraction over the Android ActionBar and iOS NavigationBar.
+http://docs.nativescript.org/ui/action-bar
+-->
+<ActionBar class="action-bar">
+    <StackLayout orientation="horizontal" columns="auto, auto" rows="auto" verticalAlignment="center" android ios:horizontalAlignment="center" android:horizontalAlignment="left">
+        <Label row="0" col="0" text="&#xf0c9;" class="fas sidedrawer-header-text var" style="margin-right: 20px; height: 100%; vertical-align: middle" (tap)="openTabDrawer();"></Label>
+        <Label  row="0" col="1" class="sidedrawer-header-text var" text="{{'app_name' | translate}}" style="height: 100%; vertical-align: middle;" (tap)="openTabDrawer();"></Label>
+    </StackLayout>
+</ActionBar>

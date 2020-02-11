@@ -1,0 +1,39 @@
+<StackLayout class="hr-light"></StackLayout>
+
+<GridLayout (tap)="onTap('/pages/notices');" columns="auto, *" class="sidedrawer-list-item"
+    title="Home" tap="onNavigationItemTap">
+    <Label row="0" col="0" text="&#xf015;" class="fa sidedrawer-icon"></Label>
+    <Label row="0" col="1" text="{{'minierp.menu.home' | translate}}" class="m-l-20 sidedrawer-item"></Label>
+</GridLayout>
+
+<StackLayout class="hr-light"></StackLayout>
+<GridLayout (tap)="onTap('/pages/contacts');" columns="auto, *" class="sidedrawer-list-item" title="Friends" tap="onNavigationItemTap">
+    <Label row="0" col="0" text="&#xf007;" class="fa sidedrawer-icon"></Label>
+    <Label row="0" col="1" text="{{'minierp.menu.contacts' | translate}}" class="m-l-20 sidedrawer-item"></Label>
+</GridLayout>
+
+<StackLayout class="hr-light"></StackLayout>
+<GridLayout (tap)="onTap('/pages/po');" columns="auto, *" class="sidedrawer-list-item" title="Friends" tap="onNavigationItemTap">
+    <Label row="0" col="0" text="&#xf54e;" class="fas sidedrawer-icon"></Label>
+    <Label row="0" col="1" text="{{'minierp.menu.purchase.order' | translate}}" class="m-l-20 sidedrawer-item"></Label>
+</GridLayout>
+
+<StackLayout class="hr-light"></StackLayout>
+<GridLayout (tap)="onTap('/pages/shippingplans');" columns="auto, *" class="sidedrawer-list-item" title="Friends" tap="onNavigationItemTap">
+    <Label row="0" col="0" text="&#xf48b;" class="fas sidedrawer-icon"></Label>
+    <Label row="0" col="1" text="{{'minierp.menu.shipping' | translate}}" class="m-l-20 sidedrawer-item"></Label>
+</GridLayout>
+
+<StackLayout class="hr-light"></StackLayout>
+<GridLayout (tap)="onTap('/pages/todos');" columns="auto, *" class="sidedrawer-list-item" title="To-Do List" tap="onNavigationItemTap">
+    <Label row="0" col="0" text="&#xf0ca;" class="fa sidedrawer-icon"></Label>
+    <Label row="0" col="1" text="{{'minierp.menu.todolist' | translate}}" class="m-l-20 sidedrawer-item"></Label>
+</GridLayout>
+
+<StackLayout class="hr-light"></StackLayout>
+<GridLayout columns="auto, *" class="sidedrawer-list-item" title="Settings" tap="onNavigationItemTap">
+    <Label row="0" col="0" text="&#xf013;" class="fa sidedrawer-icon"></Label>
+    <Label row="0" col="1" text="{{'app_settings' | translate}}" class="m-l-20 sidedrawer-item"></Label>
+</GridLayout>
+
+<StackLayout class="hr-light"></StackLayout>

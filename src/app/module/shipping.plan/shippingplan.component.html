@@ -1,0 +1,95 @@
+<GridLayout class="page padding-main" columns="*" rows="auto, *, auto">
+    <FlexboxLayout *ngIf="item" flexDirection="column" class="page" row="0">
+        <Label class="h2" style="color: burlywood" [text]="item.code"></Label>
+        <Label class="h2" [text]="(item.startDate | date: 'dd/MM/yyyy') + ' - ' + item.channel?.name"></Label>
+        <StackLayout class="hr-light"></StackLayout>
+    </FlexboxLayout>
+
+    <FlexboxLayout *ngIf="item && objPartners && tabActive === 0" flexDirection="column" class="page" row="1">
+        <GridLayout columns="*, 70px, 70px" rows="auto">
+            <Label col="0" row="0" [text]="'Partner/Customer'" class="h4 list-group-item txt-bolder"></Label>
+            <Label col="1" row="0" [text]="'Sales amount'" class="h4"></Label>
+            <Label col="2" row="0" [text]="'Return amount'" class="h4"></Label>
+        </GridLayout>
+        <ListView [items]="objPartners" itemTemplateSelector="$index">
+            <ng-template let-item="item">
+                <GridLayout columns="60px, *" rows="auto, auto, auto" (tap)="select(item);">
+                    <Label col="0" row="0" colSpan="2" [text]="'(' + item.partner.code + ') ' + item.partner.name" class="list-group-item txt-bolder"></Label>
+                    <Label col="0" row="1" [text]="'Liability'"></Label>
+                    <Label col="1" row="1" [text]="(item.liability) | number"></Label>
+                    <ListView col="0" row="2" colSpan="2" [items]="item.goods" itemTemplateSelector="$index">
+                        <ng-template let-item="item">
+                            <GridLayout columns="*, 70px, 70px" rows="auto">
+                                <Label col="0" row="0" [text]="item.product.name" class="list-group-item txt-bolder"></Label>
+                                <Label col="1" row="0" [text]="item.saleAmount | number"></Label>
+                                <Label col="2" row="0" [text]="item.receiveAmount | number"></Label>
+                            </GridLayout>
+                        </ng-template>
+                    </ListView>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </FlexboxLayout>
+    <FlexboxLayout *ngIf="item && tabActive === 1" flexDirection="column" class="page" row="1">
+        <Button text="{{'button.ADD' | translate}}" (tap)="addFee()" class="btn btn-primary m-t-20"></Button>
+        <StackLayout class="hr-thin-light"></StackLayout>
+        <ListView [items]="fees" itemTemplateSelector="$index">
+            <ng-template let-item="item">
+                <GridLayout columns="80px, *, 120px" rows="auto, auto">
+                    <Label col="0" row="0" [text]="item.feeDate | date: 'dd/MM/yyyy'" class="list-group-item txt-bolder"></Label>
+                    <Label col="1" row="0" [text]="item.title" class="list-group-item"></Label>
+                    <Label col="2" row="0" [text]="item.number"></Label>
+                    <Label col="1" row="1" [text]="item.fee | number"></Label>
+                    <Label col="2" row="1" [text]="item.vat | number"></Label>
+                    <Label col="0" row="1" [text]="item.total | number"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </FlexboxLayout>
+    <FlexboxLayout *ngIf="item && tabActive === 2" flexDirection="column" class="page" row="1">
+        <FlexboxLayout flexDirection="row" class="page"  style="width: 100%; text-align: right;">
+            <Button *ngIf="canWaiting_goods()" text="{{'button.WAITING_GOODS' | translate}}" (tap)="openWaiting_goods()" class="btn btn-primary m-t-20"></Button>
+            <Button *ngIf="canStarted()" [text]="'button.STARTED' | translate" (tap)="openStarted()" class="btn btn-primary m-t-20"></Button>
+            <Button *ngIf="canReturning()" [text]="'button.RETURNING' | translate" (tap)="openReturning()" class="btn btn-primary m-t-20"></Button>
+            <Button *ngIf="canReturned()" [text]="'button.RETURNED' | translate" (tap)="openReturned()" class="btn btn-primary m-t-20"></Button>
+        </FlexboxLayout>
+        <GridLayout columns="*, auto" rows="auto" (tap)="onTapVehicle();">
+            <Label col="0" row="0" [text]="'Vehicles'" class="h2"></Label>
+            <Label *ngIf="showVehicles === false" col="1" row="0" [text]="&#f067;" class="fas"></Label>
+            <Label *ngIf="showVehicles" col="1" row="0" [text]="&#f068;" class="fas"></Label>
+        </GridLayout>
+        <StackLayout class="hr-thin-light" ></StackLayout>
+        <ng-container *ngIf="showVehicles" >
+            <ng-container *ngFor="let detail of item.shippingPlanVehicles; let i = index">
+                <GridLayout columns="auto, *" rows="auto, auto, auto">
+                    <Label col="0" row="0" [text]="(i + 1) +'.' " class="list-group-item"></Label>
+                    <Label col="1" row="0" [text]="detail.vehicle?.assetLite?.name" class="list-group-item"></Label>
+                    <Label col="0" row="1" colSpan="2" [text]="detail.shipEmployee1?.name" class="list-group-item"></Label>
+                    <Label col="0" row="2" colSpan="2" [text]="detail.shipEmployee1?.name" class="list-group-item"></Label>
+                </GridLayout>
+                <StackLayout class="hr-thin-light"></StackLayout>
+            </ng-container>
+        </ng-container>
+        <GridLayout columns="*, 70px, 70px" rows="auto">
+            <Label col="0" row="0" [text]="'Products'" class="h2"></Label>
+            <Label col="1" row="0" [text]="'Sales amount'" class="fas"></Label>
+            <Label col="2" row="0" [text]="'Return amount'" class="fas"></Label>
+        </GridLayout>
+        <StackLayout class="hr-thin-light"></StackLayout>
+        <ListView [items]="shippingproducts" itemTemplateSelector="$index" class="list-group" style="height: 1400px;">
+            <ng-template let-item="item">
+                <GridLayout columns="*, 70px, 70px" rows="auto, auto">
+                    <Label col="0" row="0" colSpan="3" [text]="'(' + item.product?.code + ') ' + item.product?.name" class="list-group-item txt-bolder"></Label>
+                    <Label col="0" row="1" [text]="item.product?.unit?.name" class="list-group-item"></Label>
+                    <Label col="1" row="1" [text]="item.saleAmount | number" class="list-group-item center"></Label>
+                    <Label col="2" row="1" [text]="item.receiveAmount | number" class="list-group-item center"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </FlexboxLayout>
+    <BottomNavigation activeColor="turquoise" inactiveColor="white" backgroundColor="black" loaded="bottomNavigationLoaded" row="3" (tabSelected)="onBottomNavigationTabSelected($event)">
+        <BottomNavigationTab title="{{'minierp.shipping.progress' | translate}}" icon="ic_employee"></BottomNavigationTab>
+        <BottomNavigationTab title="{{'minierp.shipping.fee' | translate}}" icon="ic_partner"></BottomNavigationTab>
+        <BottomNavigationTab title="{{'minierp.shipping.info' | translate}}" icon="ic_customer"></BottomNavigationTab>
+    </BottomNavigation>
+</GridLayout>
