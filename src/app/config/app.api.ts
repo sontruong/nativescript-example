@@ -95,6 +95,6 @@ export const ADDRESS_GET_LIST: IApi = {
 };
 
 export const HEREMAP_GEO_GET: IApi = {
-  apiEndpoint: 'https://geocoder.api.here.com/6.2/geocode.json?app_id=fRMdJ6FrcwjrHxrrQw5D&app_code=4IcF1EsdIT_xM_x90jUZSQ&searchtext=',
+  apiEndpoint: 'https://geocoder.api.here.com/6.2/geocode.json?app_id=appid&app_code=appcode',
   method: 'POST',
 };
